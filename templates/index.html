@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demografia Polski</title>
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<header class="bg-blue-600 p-6 text-white text-3xl font-bold shadow-md">
+    Demografia Polski
+</header>
+
+<main class="p-8 space-y-12 w-full">
+
+    <!-- Liczba ludności -->
+    <section class="bg-white p-6 rounded shadow w-full">
+        <h2 class="text-xl font-semibold mb-4">Liczba ludności według województwa i roku</h2>
+
+        <form
+                hx-get="/demografia/"
+                hx-target="#demografiaContainer"
+                hx-swap="innerHTML"
+                class="flex flex-col sm:flex-row flex-wrap gap-4 items-start"
+        >
+            <label>
+                Województwo:
+                <select name="wojewodztwo" class="border rounded px-2 py-1">
+                    {% for row in wojewodztwa %}
+                    <option value="{{ row.wojewodztwo|replace('ł', 'l') }}">{{ row.wojewodztwo|replace('ł', 'l') }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                Rok:
+                <select name="rok" class="border rounded px-2 py-1">
+                    {% for r in [2002, 2010, 2017, 2024] %}
+                    <option value="{{ r }}">{{ r }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <button
+                    type="submit"
+                    onclick="return toggleSection('demografiaContainer', event)"
+                    class="text-white px-4 py-2 rounded shadow transition bg-blue-500 hover:bg-blue-600"
+            >
+                Pokaż dane
+            </button>
+        </form>
+
+        <div id="demografiaContainer" class="mt-6 hidden"></div>
+    </section>
+
+    <!-- Zgony -->
+    <section class="bg-white p-6 rounded shadow w-full">
+        <h2 class="text-xl font-semibold mb-4">Zgony według województw</h2>
+
+        <form
+                hx-get="/zgony/"
+                hx-target="#zgonyContainer"
+                hx-swap="innerHTML"
+                class="flex flex-col sm:flex-row flex-wrap items-start gap-4"
+        >
+            <label>
+                Rok:
+                <select name="rok" class="border rounded px-2 py-1">
+                    {% for r in [2002, 2010, 2017, 2024] %}
+                    <option value="{{ r }}">{{ r }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                Wiek:
+                <select name="wiek" class="border rounded px-2 py-1">
+                    <option value="0_4">0-4</option>
+                    <option value="5_9">5-9</option>
+                    <!-- inne opcje pominięte dla skrótu -->
+                    <option value="85">85+</option>
+                </select>
+            </label>
+
+            <button
+                    type="submit"
+                    onclick="return toggleSection('zgonyContainer', event)"
+                    class="text-white px-4 py-2 rounded shadow transition bg-blue-500 hover:bg-blue-600"
+            >
+                Pokaż zgony
+            </button>
+        </form>
+
+        <div id="zgonyContainer" class="mt-6 hidden"></div>
+    </section>
+
+    <!-- Urodzenia -->
+    <section class="bg-white p-6 rounded shadow w-full">
+        <h2 class="text-xl font-semibold mb-4">Urodzenia według województw i roku</h2>
+
+        <form
+                hx-get="/urodzenia"
+                hx-target="#urodzeniaContainer"
+                hx-swap="innerHTML"
+                class="flex flex-col sm:flex-row flex-wrap items-start gap-4"
+        >
+            <label>
+                Województwo:
+                <select name="wojewodztwo" class="border rounded px-2 py-1">
+                    {% for row in wojewodztwa %}
+                    <option value="{{ row.wojewodztwo|replace('ł', 'l') }}">{{ row.wojewodztwo|replace('ł', 'l') }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                Rok:
+                <select name="rok" class="border rounded px-2 py-1">
+                    {% for r in [2002, 2010, 2017, 2023] %}
+                    <option value="{{ r }}">{{ r }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <button
+                    type="submit"
+                    onclick="return toggleSection('urodzeniaContainer', event)"
+                    class="text-white px-4 py-2 rounded shadow transition bg-blue-500 hover:bg-blue-600"
+            >
+                Pokaż urodzenia
+            </button>
+        </form>
+
+        <div id="urodzeniaContainer" class="mt-6 hidden"></div>
+    </section>
+
+    <!-- Galeria zdjęć -->
+    <section class="bg-white p-6 rounded shadow w-full">
+        <h2 class="text-xl font-semibold mb-4">Galeria danych</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <img src="/static/Zrzut1.png" alt="Wizualizacja 1"
+                 class="rounded-xl shadow-md w-full h-auto">
+            <img src="/static/Zrzut2.png" alt="Wizualizacja 2"
+                 class="rounded-xl shadow-md w-full h-auto">
+            <img src="/static/Zrzut3.png" alt="Wizualizacja 3"
+                 class="rounded-xl shadow-md w-full h-auto">
+            <img src="/static/Zrzut4.png" alt="Wizualizacja 4"
+                 class="rounded-xl shadow-md w-full h-auto">
+            <img src="/static/Zrzut5.png" alt="Wizualizacja 5"
+                 class="rounded-xl shadow-md w-full h-auto">
+        </div>
+    </section>
+
+    <!-- Mapa demograficzna -->
+    <section class="bg-white p-6 rounded shadow text-center w-full">
+        <h2 class="text-xl font-semibold mb-4">Mapa demograficzna Polski – 2024</h2>
+        <div class="flex justify-center">
+            <img src="/static/mapa.bmp" alt="Mapa demograficzna Polski 2024"
+                 class="rounded-xl shadow-md max-w-full border border-gray-300">
+        </div>
+    </section>
+
+</main>
+
+<script>
+    function toggleSection(id, event) {
+        const div = document.getElementById(id);
+        const isVisible = !div.classList.contains("hidden");
+
+        if (isVisible) {
+            div.classList.add("hidden");
+            event.preventDefault();
+            return false;
+        }
+
+        return true;
+    }
+
+    document.body.addEventListener('htmx:afterSwap', (e) => {
+        const id = e.detail.target.id;
+        if (["demografiaContainer", "zgonyContainer", "urodzeniaContainer"].includes(id)) {
+            document.getElementById(id).classList.remove("hidden");
+        }
+    });
+</script>
+
+</body>
+</html>
