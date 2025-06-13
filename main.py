@@ -7,12 +7,12 @@ import os
 import uvicorn
 from fastapi.staticfiles import StaticFiles
 
-from Demografia.import_zgony_csv_to_db import import_zgony_csv_to_db
-from Demografia.import_urodzenia_csv import import_urodzenia_csv_to_db
+# from Demografia.import_zgony_csv_to_db import import_zgony_csv_to_db
+# from Demografia.import_urodzenia_csv import import_urodzenia_csv_to_db
 from Demografia.models import Demografia, Zgony
-from Demografia.csv_importer import import_csv_to_db
+#from Demografia.csv_importer import import_csv_to_db
 from Demografia.Database import get_db
-from Demografia.mapa import generuj_mape
+#from Demografia.mapa import generuj_mape
 from Demografia import crud
 
 app = FastAPI()
