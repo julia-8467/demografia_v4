@@ -20,6 +20,9 @@ router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse(url="/index/")
 
 # @app.post("/import-csv")
 # def import_csv(db: Session = Depends(get_db)):
