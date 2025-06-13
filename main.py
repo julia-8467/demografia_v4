@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException, APIRouter, Request
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from sqlalchemy import func
@@ -20,8 +20,8 @@ router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@app.get("/", include_in_schema=False)
-def root():
+@app.get("/")
+def redirect_to_index():
     return RedirectResponse(url="/index/")
 
 # @app.post("/import-csv")
