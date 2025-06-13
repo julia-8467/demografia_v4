@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 import os
-import uvicorn
+#import uvicorn
 from fastapi.staticfiles import StaticFiles
 
 # from Demografia.import_zgony_csv_to_db import import_zgony_csv_to_db
