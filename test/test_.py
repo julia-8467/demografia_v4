@@ -1,6 +1,10 @@
 from fastapi.testclient import TestClient
 from main import app   # upewnij się, że Twój plik główny to main.py
 
+import sys, os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
 client = TestClient(app)
 
 def test_homepage():
