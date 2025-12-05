@@ -148,5 +148,3 @@ Projekt można rozszerzyć o:
 * API zwracające dane w formacie JSON dla aplikacji zewnętrznych.
 
 
-
-Napisz tylko czego potrzebujesz.
