@@ -1,7 +1,3 @@
-Poniżej gotowe, kompletne **README.md**, w pełni dopasowane do Twojego kodu. Możesz wkleić bez zmian do GitHuba.
-
----
-
 # Analiza Demograficzna Polski – Aplikacja FastAPI
 
 Aplikacja umożliwia przeglądanie danych demograficznych Polski z podziałem na województwa, lata, urodzenia oraz zgony w różnych grupach wiekowych. Projekt wykorzystuje **FastAPI**, **SQLAlchemy** oraz **Jinja2Templates** do generowania widoków HTML oraz udostępniania danych w sposób dynamiczny.
