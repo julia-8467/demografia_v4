@@ -136,15 +136,6 @@ FastAPI generuje dokumentację automatycznie:
 * Jinja2
 * Uvicorn
 
----
 
-## 7. Dalszy rozwój
-
-Projekt można rozszerzyć o:
-
-* import danych CSV z poziomu API,
-* zapisywanie map lub wizualizacji,
-* statystyki porównawcze pomiędzy województwami,
-* API zwracające dane w formacie JSON dla aplikacji zewnętrznych.
 
 
