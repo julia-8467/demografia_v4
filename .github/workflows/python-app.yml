@@ -47,6 +47,9 @@ jobs:
             sleep 1
           done
 
+      - name: Search for create_all
+        run: grep -R "create_all" -n .
+
       - name: Run Alembic migrations
         run: alembic upgrade head
 
