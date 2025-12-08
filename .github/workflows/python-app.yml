@@ -11,11 +11,15 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
+    env:
+      TESTING: "1"              # 🔥 Najważniejsze – blokuje połączenie z prawdziwą bazą
+      DATABASE_URL: "postgresql://postgres:postgres@db:5432/demografia"
+
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
@@ -33,5 +37,5 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-    - name: Test with pytest
+    - name: Run pytest
       run: pytest
