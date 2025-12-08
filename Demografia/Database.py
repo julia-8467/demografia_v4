@@ -1,32 +1,30 @@
-import os
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base
 from . import config
+from .config import DATABASE_USERNAME
 
-TESTING = os.getenv("TESTING") == "1"
+DATABASE_USERNAME= config.DATABASE_USERNAME
+DATABASE_PASSWORD = config.DATABASE_PASSWORD
+DATABASE_HOST = config.DATABASE_HOST
+DATABASE_NAME = config.DATABASE_NAME
+DATABASE_PORT = config.DATABASE_PORT
 
-if TESTING:
-    # Używamy SQLite w pamięci – zero problemów w CI
-    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
-else:
-    DATABASE_USERNAME = config.DATABASE_USERNAME
-    DATABASE_PASSWORD = config.DATABASE_PASSWORD
-    DATABASE_HOST = config.DATABASE_HOST
-    DATABASE_NAME = config.DATABASE_NAME
-    DATABASE_PORT = config.DATABASE_PORT
+# Składamy connection string
+SQLALCHEMY_DATABASE_URI = (
+    f"postgresql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOST}:{DATABASE_PORT}/{DATABASE_NAME}"
+)
 
-    SQLALCHEMY_DATABASE_URI = (
-        f"postgresql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}"
-        f"@{DATABASE_HOST}:{DATABASE_PORT}/{DATABASE_NAME}"
-    )
+# Tworzenie silnika SQLAlchemy
+engine = create_engine(SQLALCHEMY_DATABASE_URI, echo=True)
 
-engine = create_engine(SQLALCHEMY_DATABASE_URI, echo=False)
-
+# Tworzenie sesji
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+# Baza do deklarowania modeli
 Base = declarative_base()
 
-
+# Funkcja do pobierania sesji DB (przydatna w FastAPI np.)
 def get_db():
     db = SessionLocal()
     try:
