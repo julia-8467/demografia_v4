@@ -2,12 +2,10 @@ import os
 
 APP_ENV = os.getenv('APP_ENV', 'development')
 
-# Dane produkcyjne
-DATABASE_USERNAME = os.getenv('DATABASE_USERNAME', )
-DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD', )
-DATABASE_HOST = os.getenv('DATABASE_HOST', )
-DATABASE_PORT = os.getenv('DATABASE_PORT', )
-DATABASE_NAME = os.getenv('DATABASE_NAME', )
+DATABASE_USERNAME = os.getenv('DATABASE_USERNAME', 'postgres')
+DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD', 'postgres')
+DATABASE_HOST = os.getenv('DATABASE_HOST', 'db')
+DATABASE_PORT = os.getenv('DATABASE_PORT', '5432')
+DATABASE_NAME = os.getenv('DATABASE_NAME', 'demografia')
 
-# Dane testowe (osobna baza na testy)
-TEST_DATABASE_NAME = os.getenv('TEST_DATABASE_NAME', 'postgres_test')
+TEST_DATABASE_NAME = os.getenv('TEST_DATABASE_NAME', 'demografia_test')
