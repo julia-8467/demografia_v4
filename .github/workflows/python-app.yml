@@ -15,7 +15,7 @@ jobs:
 
     env:
       TESTING: "1"              # 🔥 Najważniejsze – blokuje połączenie z prawdziwą bazą
-      DATABASE_URL: "postgresql://postgres:postgres@db:5432/demografia"
+      DATABASE_URL: "sqlite:///:memory:"   # Używana tylko jeśli FastAPI jej wymaga
 
     steps:
     - name: Checkout repository
