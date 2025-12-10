@@ -81,7 +81,7 @@ Każde pole reprezentuje sumaryczną liczbę zgonów w danej grupie wiekowej.
 | Metoda | Ścieżka        | Opis                                       |
 | ------ | -------------- | ------------------------------------------ |
 | GET    | `/`            | przekierowanie do `/index/`                |
-| GET    | `/index/`      | lista województw (HTML)                    |
+| GET    | `/index/`      | strona główna (HTML)                    |
 | GET    | `/demografia/` | dane demograficzne dla województwa i roku  |
 | GET    | `/zgony/`      | sumaryczne zgony dla roku i grupy wiekowej |
 | GET    | `/urodzenia/`  | dane o urodzeniach dla regionu i roku      |
